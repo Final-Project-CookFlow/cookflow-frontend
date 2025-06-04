@@ -2,8 +2,6 @@ import React from "react";
 import Card from "../components/Card";
 import useRecipe from "../hooks/useRecipe";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 
 const recipeIds = [1, 2, 3];
 
@@ -110,7 +108,6 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
