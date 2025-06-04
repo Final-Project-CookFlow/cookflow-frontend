@@ -2,6 +2,9 @@ import React from "react";
 import Card from "../components/Card";
 import useRecipe from "../hooks/useRecipe";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import { Badge } from "../components";
 
 const recipeIds = [1, 2, 3];
 
@@ -65,7 +68,9 @@ const Home = () => {
             </h1>
             <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
               {categories.map((category) => (
-                <CategoryCheckbox key={category} name={category} />
+                <Badge key={category}>
+                  {category}
+                </Badge>
               ))}
             </div>
           </div>
