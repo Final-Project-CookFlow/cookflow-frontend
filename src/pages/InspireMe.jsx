@@ -67,7 +67,10 @@ const InspireMe = () => {
   // Muestra si no hay recetas disponibles
   if (!mockRecipes.length) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div 
+        className="min-h-screen flex items-center justify-center" 
+        data-testid="no-recipes-message"
+      >
         <p>No recipes available.</p>
       </div>
     );
@@ -76,17 +79,32 @@ const InspireMe = () => {
   // Estado de carga
   if (loading || !recipe) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse bg-gray-200 h-64 w-80 rounded-lg"></div>
+      <div 
+        className="min-h-screen flex items-center justify-center"
+        data-testid="loading-state"
+      >
+        <div 
+          className="animate-pulse bg-gray-200 h-64 w-80 rounded-lg"
+          id="loading-placeholder"
+        ></div>
       </div>
     );
   }
 
   // Renderiza la receta actual con SwipeCard
   return (
-    <div className="min-h-screen py-8 px-4" style={{ backgroundColor: '#FDF3E8' }}>
+    <div 
+      className="min-h-screen py-8 px-4" 
+      style={{ backgroundColor: '#FDF3E8' }} 
+      data-testid="inspire-me-page"
+      id="inspire-me-container"
+    >
       <div className="max-w-md mx-auto">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-8 text-gray-900">
+        <h1 
+          className="text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-8 text-gray-900"
+          data-testid="page-title"
+          id="inspire-title"
+        >
           Swipe the Dish
         </h1>
         <SwipeCard
@@ -96,6 +114,8 @@ const InspireMe = () => {
           }}
           onToggleFavorite={handleToggleFavorite}
           onSkip={handleSkip}
+          data-testid="swipe-card"
+          id="swipe-card"
         />
       </div>
     </div>

@@ -63,8 +63,14 @@ const ShoppingList = () => {
 };
 
   return (
-    <div className="relative bg-background flex flex-col items-center min-h-screen">
-      <header className="w-full flex justify-between items-center p-4 relative z-20 px-6"></header>
+    <div
+      className="relative bg-background flex flex-col items-center min-h-screen"
+      data-testid="shoppinglist-container"
+    >
+      <header
+        className="w-full flex justify-between items-center p-4 relative z-20 px-6"
+        data-testid="shoppinglist-header"
+      ></header>
 
       {/* Título */}
       <div className="w-full max-w-md text-center mb-6">
@@ -77,11 +83,12 @@ const ShoppingList = () => {
       <div className="flex-grow w-full max-w-md px-4 py-2 flex flex-col justify-between pb-8">
         <main className="w-full">
           {items.length > 0 ? (
-            <div className="space-y-3">
+            <div className="space-y-3" data-testid="shoppinglist-items-container">
               {items.map((item) => (
                 <div
                   key={item.id}
                   className="flex items-center justify-between p-4 bg-primary rounded-lg shadow-sm"
+                  data-testid={`shoppinglist-item-${item.id}`}
                 >
                   <div className="flex-grow flex items-center">
                     <input
@@ -89,6 +96,7 @@ const ShoppingList = () => {
                       checked={item.checked}
                       onChange={() => handleToggleCheck(item.id)}
                       className="w-6 h-6 border-2 rounded cursor-pointer"
+                      data-testid={`shoppinglist-checkbox-${item.id}`}
                     />
                     <span
                       className={`ml-3 text-lg ${
@@ -96,6 +104,7 @@ const ShoppingList = () => {
                           ? "line-through text-gray-500"
                           : "text-gray-800"
                       }`}
+                      data-testid={`shoppinglist-item-name-${item.id}`}
                     >
                       {item.name}
                     </span>
@@ -107,6 +116,7 @@ const ShoppingList = () => {
                     }}
                     className="ml-4 p-1 text-gray-500 hover:text-gray-700"
                     aria-label={`Eliminar ${item.name}`}
+                    data-testid={`shoppinglist-delete-btn-${item.id}`}
                   >
                     <svg
                       className="w-6 h-6"
@@ -130,6 +140,7 @@ const ShoppingList = () => {
               <button
                 className="block mx-auto mt-6 py-2 px-6 border-2 border-gray-400 text-gray-700 font-semibold rounded-full hover:bg-gray-100 transition duration-200"
                 onClick={handleClearAll}
+                data-testid="shoppinglist-clearall-btn"
               >
                 Eliminar Todo
               </button>

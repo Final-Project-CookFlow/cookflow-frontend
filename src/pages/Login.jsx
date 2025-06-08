@@ -31,7 +31,7 @@ import { Link } from "react-router-dom";
  * @returns {JSX.Element} Vista de login
  */
 const Login = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
     /**
      * Simula inicio de sesión redirigiendo al home.
