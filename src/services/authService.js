@@ -47,7 +47,7 @@ export const isTokenValid = () => {
   const token = getToken();
   if (!token) return false;
   try {
-    const { exp } = jwtDecode(token);
+    const { exp } = jwt_decode(token);
     return Date.now() < exp * 1000;
   } catch {
     return false;
