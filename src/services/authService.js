@@ -21,7 +21,7 @@
  * @author Nico
  */
 import api from "./api";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const TOKEN_KEY = "TOKEN_KEY";
 
@@ -47,7 +47,7 @@ export const isTokenValid = () => {
   const token = getToken();
   if (!token) return false;
   try {
-    const { exp } = jwt_decode(token);
+    const { exp } = jwtDecode(token);
     return Date.now() < exp * 1000;
   } catch {
     return false;
