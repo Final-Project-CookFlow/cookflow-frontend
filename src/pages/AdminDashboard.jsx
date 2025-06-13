@@ -50,6 +50,7 @@ const AdminDashboard = () => {
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Panel de Control</h2>
             <p className="text-gray-600">Bienvenido al panel de administración. Selecciona una opción del menú lateral para gestionar el contenido de CookFlow.</p>
             
+            
           </div>
         );
       case 'recipes':
