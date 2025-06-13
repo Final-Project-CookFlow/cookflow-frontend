@@ -18,7 +18,7 @@ import api from "./api";
  * 
  * @type {string}
  */
-const BASE_URL = "/ingredients";
+const BASE_URL = "recipes/ingredients";
 
 /**
  * Base URL for administrator-specific ingredient API endpoints.
@@ -27,7 +27,7 @@ const BASE_URL = "/ingredients";
  * 
  * @type {string}
  */
-const ADMIN_BASE_URL = "/admin/ingredients";
+const ADMIN_BASE_URL = "recipes/admin/ingredients";
 
 /**
  * Service for interacting with ingredient API endpoints.

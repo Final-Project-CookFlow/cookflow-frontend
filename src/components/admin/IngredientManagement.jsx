@@ -63,6 +63,7 @@ const IngredientManagement = () => {
         const data = await ingredientService.getAllIngredientsAdmin();
         const sorted = [...data].sort((a, b) => a.name.localeCompare(b.name));
         setIngredients(sorted);
+        console.log(ingredients);
       } catch (error) {
         console.error("Error loading ingredients:", error);
       }

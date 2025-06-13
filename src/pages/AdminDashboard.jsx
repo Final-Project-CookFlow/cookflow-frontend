@@ -1,17 +1,46 @@
-// src/pages/AdminDashboard.jsx
+/**
+ * @file AdminDashboard.jsx
+ * @description
+ * Página principal del panel de administración de CookFlow.
+ * Permite a los administradores navegar y gestionar recetas, usuarios, categorías e ingredientes desde un único dashboard.
+ *
+ * Funcionalidades principales:
+ * - Sidebar de navegación para acceder a las distintas secciones administrativas.
+ * - Renderizado dinámico de los componentes de gestión según la sección activa (recetas, usuarios, categorías, ingredientes).
+ * - Visualización de un panel de control/resumen al acceder al dashboard.
+ * - Estructura visual moderna y responsiva con Tailwind CSS.
+ *
+ * Estados:
+ * - activeSection: controla la sección activa del dashboard ('dashboard', 'recipes', 'users', 'categories', 'ingredients').
+ *
+ * Componentes utilizados:
+ * - RecipeManagement: gestión de recetas.
+ * - UserManagement: gestión de usuarios.
+ * - CategoryManagement: gestión de categorías.
+ * - IngredientManagement: gestión de ingredientes.
+ *
+ * Uso:
+ * Este componente debe ser usado por administradores y es el punto de entrada para la administración de la aplicación.
+ * Permite cambiar de sección mediante el sidebar y muestra el contenido correspondiente en el área principal.
+ *
+ * @author
+ * Ruben Ortega
+ * @modificated by
+ * Lorena Martinez y Noemi Casaprima 
+ */
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Necesitarás esto para la navegación si el sidebar no es solo visual
+import { Link } from 'react-router-dom'; 
 
-// Importa los componentes de gestión que crearás
+
 import RecipeManagement from '../components/admin/RecipeManagement';
 import UserManagement from '../components/admin/UserManagement';
 import CategoryManagement from '../components/admin/CategoryManagement';
 import IngredientManagement from '../components/admin/IngredientManagement';
 
 const AdminDashboard = () => {
-  // Estado para controlar qué sección del dashboard está activa
-  const [activeSection, setActiveSection] = useState('dashboard'); // Puede ser 'dashboard', 'recipes', 'users', 'categories', 'ingredients'
+  
+  const [activeSection, setActiveSection] = useState('dashboard'); 
 
   const renderContent = () => {
     switch (activeSection) {
@@ -20,7 +49,7 @@ const AdminDashboard = () => {
           <div className="p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Panel de Control</h2>
             <p className="text-gray-600">Bienvenido al panel de administración. Selecciona una opción del menú lateral para gestionar el contenido de CookFlow.</p>
-            {/* Puedes añadir aquí algunos resúmenes o estadísticas rápidas */}
+            
           </div>
         );
       case 'recipes':
@@ -42,8 +71,8 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100"> {/* Fondo general del dashboard */}
-      {/* Sidebar */}
+    <div className="flex min-h-screen bg-gray-100"> 
+      
       <div className="w-64 bg-white shadow-lg p-6 flex flex-col">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-800"> Administrador</h1>
@@ -117,11 +146,9 @@ const AdminDashboard = () => {
             </li>
           </ul>
         </nav>
-        {/* Espacio para cualquier otra información o pie de página del sidebar */}
+       
       </div>
-
-      {/* Contenido principal */}
-      <div className="flex-1 p-8 bg-gray-100"> {/* Contenedor para el contenido principal */}
+      <div className="flex-1 p-8 bg-gray-100"> 
         {renderContent()}
       </div>
     </div>
