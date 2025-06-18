@@ -15,10 +15,6 @@ import { useNavigate } from "react-router-dom";
 import { ingredientService } from "../services/ingredientService";
 import { unitService } from "../services/unitService";
 import { unitTypeService } from "../services/unitTypeService";
-// import { getUserIdFromToken } from "../services/authService";
-
-
-
 
 const AddRecipe = () => {
   const [parentCategories, setParentCategories] = useState([]);
@@ -342,11 +338,6 @@ for (const [key, value] of recipePayload.entries()) {
 console.log("Pasos formateados para el backend:", formattedSteps);
 recipePayload.append("steps", JSON.stringify(formattedSteps));
 
-
-
-
-
-
 console.log("--- FIN de recipePayload ---");
 
     const recetaGuardada = await recipeService.createRecipe(recipePayload);
@@ -389,13 +380,7 @@ console.log("--- FIN de recipePayload ---");
             {mensaje}
           </div>
         )}
-        {recipeId && (
-          <div className="mb-4 px-3 py-2 rounded-lg text-sm font-mono bg-green-100 text-green-800">
-            <strong>recipe_id generado:</strong> {recipeId}
-          </div>
-        )}
-
-        {/* Imagen de la receta */}
+       {/* Imagen de la receta */}
         <div
           className={`bg-white border border-gray-300 rounded-xl h-48 flex flex-col justify-center items-center mb-6 overflow-hidden relative transition-all duration-200 ${
             isDragOver ? "border-accent border-2 bg-accent/5" : ""
@@ -488,14 +473,14 @@ console.log("--- FIN de recipePayload ---");
 
             {/* Selector de categorías padre e hijas */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Categoría padre</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Categorías</label>
               <select
                 className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none bg-white"
                 value={selectedParent || ""}
                 onChange={e => setSelectedParent(Number(e.target.value))}
               >
                 <option value="" className="text-gray-400">
-                  Selecciona una categoría padre
+                  Selecciona una categoría
                 </option>
                 {parentCategories.map(cat => (
                   <option key={cat.id} value={cat.id}>{cat.name}</option>
@@ -503,7 +488,7 @@ console.log("--- FIN de recipePayload ---");
               </select>
               {childCategories.length > 0 && (
                 <>
-                  <label className="block text-sm font-medium text-gray-700 mt-2 mb-1">Categorías hijas</label>
+                  <label className="block text-sm font-medium text-gray-700 mt-2 mb-1">Subcategorías</label>
                   <div className="flex flex-wrap gap-2">
                     {childCategories.map((categoria) => (
                       <button
@@ -587,15 +572,23 @@ console.log("--- FIN de recipePayload ---");
                       rules={{ required: "El nombre del ingrediente es obligatorio" }}
                       render={({ field }) => (
                         <>
-                          <Input
+                          
+                          <select
                             {...field}
                             id={`ingredient-name-${index}`}
-                            list={`ingredientes-list-${index}`}
-                            placeholder="Ej: Harina, Leche..."
-                            className="w-full focus:outline-none"
+                            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none bg-white"
                             onChange={e => handleIngredientChange(e, index)}
                             required
-                          />
+                          >
+                            <option value="">Selecciona un ingrediente</option>
+                            {allIngredients.map(i => (
+                              <option key={i.id} value={i.name}>
+                                {i.name}
+                              </option>
+                            ))}
+                          </select>
+                     
+                          
                           <datalist id={`ingredientes-list-${index}`}>
                             {allIngredients.map(i => (
                               <option key={i.id} value={i.name} />
@@ -675,6 +668,7 @@ console.log("--- FIN de recipePayload ---");
                   type="button"
                   onClick={() => appendIngredient({ name: "", quantity: "", unit: "" })}
                   className="border px-6 py-3 rounded-xl h-10 flex justify-center items-center mt-2"
+                  style={{ width: "100%" }}
                 >
                   Añadir ingrediente <Plus className="w-5 h-5" />
                 </button>
@@ -806,6 +800,7 @@ console.log("--- FIN de recipePayload ---");
                   }
                   className="border rounded-xl px-6 py-3 h-10 flex justify-center items-center"
                   data-testid="add-step-button"
+                  style={{ width: "100%" }}
                 >
                   Añadir paso
                   <Plus className="w-5 h-5" />
