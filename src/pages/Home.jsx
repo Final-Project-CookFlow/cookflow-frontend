@@ -11,12 +11,12 @@
  * Usa `useFavorites` para gestionar las recetas favoritas del usuario
  *
  * @author Yuliia Martynovych
- * @module Home 
+ * @module Home
  * @modifiedby Ana Castro
  * @modified adaptar el componente Card.jsx para usarlo directamente, gestion de favorites a través del hook useFavorites,
  * gestion de categorias a través del hook useCategories,
  *  añadida la sección de inspiración con un botón que redirige a /inspire-me.
- *  Seleccion de las tres ultimas recetas creadas en la db.
+ *  Seleccion de las tres ultimas recetas creadas en la db. Integracion de categorias en la card.
  */
 
 import { Badge, Button, Card } from "../components";
@@ -115,9 +115,21 @@ const Home = () => {
                                 id={`recipe-card-${recipe.id}`}
                                 image={recipe.image_url}
                                 name={recipe.name}
-                                category={recipe.category}
+                                category={
+                                    Array.isArray(recipe.categories)
+                                        ? recipe.categories
+                                              .map((catId) => {
+                                                  const cat = categories.find(
+                                                      (c) => c.id === (typeof catId === "object" ? catId.id : catId)
+                                                  );
+                                                  return cat?.name;
+                                              })
+                                              .filter(Boolean)
+                                              .join("\n") // puedes usar "\n" si luego aplicas white-space: pre-line
+                                        : "Sin categoría"
+                                }
                                 time={`${recipe.duration_minutes}`}
-                               isFavorite={favorites.includes(String(recipe.id))} 
+                                isFavorite={favorites.includes(String(recipe.id))}
                                 onToggleFavorite={() => toggleFavorite(recipe.id)}
                                 onClick={() => navigate(`/recipe/${recipe.id}`)}
                             />

@@ -5,7 +5,7 @@
  * @author Saray
  * @modified Ana Castro - Refactorización del filtrado a hook personalizado, integración con base de datos
  * para categorías y recetas. Se ha externalizado la lógica de selección automática desde parámetros de URL
- * hacia el hook de filtros.
+ * hacia el hook de filtros. Integracion de categorias en la card.
  */
 
 import { useState } from "react";
@@ -146,7 +146,19 @@ const Search = () => {
                                     id={`recipe-card-${recipe.id}`}
                                     image={recipe.image_url}
                                     name={recipe.name}
-                                    category={recipe.category}
+                                    category={
+                                        Array.isArray(recipe.categories)
+                                            ? recipe.categories
+                                                  .map((catId) => {
+                                                      const cat = categories.find(
+                                                          (c) => c.id === (typeof catId === "object" ? catId.id : catId)
+                                                      );
+                                                      return cat?.name;
+                                                  })
+                                                  .filter(Boolean)
+                                                  .join("\n")
+                                            : "Sin categoría"
+                                    }
                                     time={`${recipe.duration_minutes}`}
                                     isFavorite={
                                         Array.isArray(favorites) &&
